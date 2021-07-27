@@ -15,15 +15,10 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/', function (Request $request) {
-    $url = 'http://api-training.test/api/users';
-
-    $response = Http::get($url,[
-        'search' => $request->search
-    ]);
-
-    $users = $response->json()['data'];
-    return view('welcome',compact('users'));
-});
+Route::get('/users','App\Http\Controllers\API\UserController@index')->name('index');
+Route::get('/users/create','App\Http\Controllers\API\UserController@store')->name('store');
+Route::get('/users/{user}','App\Http\Controllers\API\UserController@show')->name('edit');
+Route::get('/users/show/{user}','App\Http\Controllers\API\UserController@update')->name('update');
+Route::get('/users/delete/{id}','App\Http\Controllers\API\UserController@delete')->name('delete');
 
 
